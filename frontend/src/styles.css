@@ -1,0 +1,289 @@
+:root {
+  color: #172033;
+  background: #f4f7fb;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  background: #2563eb;
+  color: white;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  filter: brightness(0.95);
+}
+
+button.ghost {
+  background: #e8eefc;
+  color: #1f3a8a;
+}
+
+button.wide {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #d7deea;
+  border-radius: 14px;
+  padding: 0.75rem 0.85rem;
+  background: #fff;
+  color: #172033;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  color: #475569;
+  font-weight: 650;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.shell {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 300px 1fr;
+}
+
+.sidebar {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.sidebar h1 {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.nav {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.nav a {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav a.active,
+.nav a:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.profile-chip {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.profile-chip span {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.content {
+  padding: 2rem;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) 1fr;
+  gap: 1.2rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.card,
+.hero-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 1.3rem;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #ffffff, #dbeafe);
+}
+
+.card-header,
+.page-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eyebrow {
+  color: #2563eb;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.availability-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr auto;
+  gap: 0.7rem;
+}
+
+.match-list,
+.course-grid,
+.group-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.course-grid,
+.group-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 1rem;
+}
+
+.compact-card,
+.group-card {
+  box-shadow: none;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns: 1fr 120px minmax(220px, 320px);
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+}
+
+.match-row > div:nth-child(2),
+.match-row > div:nth-child(3) {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+}
+
+.match-row strong {
+  font-size: 2rem;
+  color: #2563eb;
+}
+
+.meta-grid {
+  display: grid;
+  gap: 0.45rem;
+  color: #475569;
+  margin: 1rem 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.4rem 0.7rem;
+  background: #dbeafe;
+  color: #1e40af;
+  font-weight: 800;
+  font-size: 0.78rem;
+}
+
+.success {
+  color: #047857;
+  font-weight: 700;
+}
+
+.error {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at top left, #bfdbfe, transparent 35%),
+    radial-gradient(circle at bottom right, #dbeafe, transparent 30%),
+    #f8fafc;
+}
+
+.login-card {
+  width: min(100%, 460px);
+  background: white;
+  border-radius: 28px;
+  padding: 2rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 30px 90px rgba(37, 99, 235, 0.12);
+}
+
+@media (max-width: 900px) {
+  .shell,
+  .page-grid,
+  .match-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    min-height: auto;
+  }
+
+  .availability-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: studysync-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: studysync
+      POSTGRES_PASSWORD: studysync_password
+      POSTGRES_DB: studysync_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - studysync_pgdata:/var/lib/postgresql/data
+
+volumes:
+  studysync_pgdata:

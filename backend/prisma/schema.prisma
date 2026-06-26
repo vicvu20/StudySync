@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MembershipRole {
+  OWNER
+  MEMBER
+}
+
+enum MembershipStatus {
+  REQUESTED
+  APPROVED
+  REJECTED
+}
+
+enum MeetingMode {
+  IN_PERSON
+  ONLINE
+  HYBRID
+}
+
+model User {
+  id              String        @id @default(cuid())
+  name            String
+  email           String        @unique
+  passwordHash    String
+  major           String?
+  bio             String?
+  studyPreference String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  courses         UserCourse[]
+  availabilities  Availability[]
+  ownedGroups     StudyGroup[]  @relation("GroupOwner")
+  memberships     Membership[]
+  messages        Message[]
+  ratingsGiven    Rating[]      @relation("Rater")
+  ratingsReceived Rating[]      @relation("Ratee")
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  code        String       @unique
+  title       String
+  description String?
+  createdAt   DateTime     @default(now())
+
+  students    UserCourse[]
+  groups      StudyGroup[]
+}
+
+model UserCourse {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+model Availability {
+  id        String @id @default(cuid())
+  userId    String
+  dayOfWeek Int
+  startTime String
+  endTime   String
+
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudyGroup {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  courseId    String
+  ownerId     String
+  studyGoal   String?
+  location    String?
+  meetingMode MeetingMode  @default(HYBRID)
+  maxMembers  Int          @default(6)
+  isOpen      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  owner       User         @relation("GroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  memberships Membership[]
+  sessions    StudySession[]
+  messages    Message[]
+  ratings     Rating[]
+}
+
+model Membership {
+  id       String           @id @default(cuid())
+  userId   String
+  groupId  String
+  role     MembershipRole   @default(MEMBER)
+  status   MembershipStatus @default(REQUESTED)
+  joinedAt DateTime         @default(now())
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group    StudyGroup       @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, groupId])
+}
+
+model StudySession {
+  id        String     @id @default(cuid())
+  groupId   String
+  title     String
+  startTime DateTime
+  endTime   DateTime
+  location  String?
+  notes     String?
+  createdAt DateTime   @default(now())
+
+  group     StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id        String     @id @default(cuid())
+  groupId   String
+  userId    String
+  body      String
+  createdAt DateTime   @default(now())
+
+  group     StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Rating {
+  id        String     @id @default(cuid())
+  groupId   String
+  raterId   String
+  rateeId   String
+  score     Int
+  comment   String?
+  createdAt DateTime   @default(now())
+
+  group     StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  rater     User       @relation("Rater", fields: [raterId], references: [id], onDelete: Cascade)
+  ratee     User       @relation("Ratee", fields: [rateeId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, raterId, rateeId])
+}

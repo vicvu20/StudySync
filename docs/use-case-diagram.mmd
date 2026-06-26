@@ -1,0 +1,32 @@
+flowchart LR
+    Student((Student))
+    Admin((Admin / Instructor))
+
+    subgraph StudySync System
+        Register[Register / Login]
+        Profile[Manage Profile]
+        Courses[Select Courses]
+        Availability[Set Availability]
+        Match[Find Study Partners]
+        CreateGroup[Create Study Group]
+        JoinGroup[Join / Request Group]
+        Schedule[Schedule Study Session]
+        Message[Post Group Message]
+        Rate[Rate Group Members]
+        History[View Study History]
+        ManageCourses[Manage Course Catalog]
+    end
+
+    Student --> Register
+    Student --> Profile
+    Student --> Courses
+    Student --> Availability
+    Student --> Match
+    Student --> CreateGroup
+    Student --> JoinGroup
+    Student --> Schedule
+    Student --> Message
+    Student --> Rate
+    Student --> History
+
+    Admin --> ManageCourses
