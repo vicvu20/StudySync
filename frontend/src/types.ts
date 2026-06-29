@@ -53,3 +53,13 @@ export type Match = {
   averageRating: number | null;
   score: number;
 };
+
+
+export type GroupMessage = {
+  id: string;
+  groupId: string;
+  userId: string;
+  body: string;
+  createdAt: string;
+  user: Pick<User, 'id' | 'name'>;
+};

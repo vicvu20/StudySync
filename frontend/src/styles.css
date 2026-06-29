@@ -287,3 +287,67 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.selected-card {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.message-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+}
+
+.message-list {
+  display: grid;
+  gap: 0.8rem;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.message-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1rem;
+  background: #f8fafc;
+}
+
+.message-item p {
+  margin-bottom: 0;
+  color: #334155;
+  white-space: pre-wrap;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+  color: #475569;
+}
+
+.message-meta span {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.message-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
