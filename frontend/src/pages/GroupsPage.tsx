@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { apiRequest } from '../api/client';
 import { GroupCard } from '../components/GroupCard';
+import { GroupMessages } from '../components/GroupMessages';
 import { useAuth } from '../context/AuthContext';
 import type { Course, StudyGroup } from '../types';
 
@@ -9,6 +10,7 @@ export function GroupsPage() {
   const [groups, setGroups] = useState<StudyGroup[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [message, setMessage] = useState('');
+  const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -21,6 +23,7 @@ export function GroupsPage() {
   async function loadGroups() {
     const data = await apiRequest<StudyGroup[]>('/groups', { token });
     setGroups(data);
+    setSelectedGroupId((current) => current ?? data[0]?.id ?? null);
   }
 
   useEffect(() => {
@@ -100,9 +103,19 @@ export function GroupsPage() {
         </div>
         <div className="group-grid">
           {groups.map((group) => (
-            <GroupCard key={group.id} group={group} onJoin={joinGroup} />
+            <GroupCard
+              key={group.id}
+              group={group}
+              onJoin={joinGroup}
+              onSelect={setSelectedGroupId}
+              isSelected={group.id === selectedGroupId}
+            />
           ))}
         </div>
+      </section>
+
+      <section className="full-width">
+        <GroupMessages group={groups.find((group) => group.id === selectedGroupId) ?? null} token={token} />
       </section>
     </div>
   );

@@ -1,8 +1,15 @@
 import type { StudyGroup } from '../types';
 
-export function GroupCard({ group, onJoin }: { group: StudyGroup; onJoin: (groupId: string) => void }) {
+type GroupCardProps = {
+  group: StudyGroup;
+  onJoin: (groupId: string) => void;
+  onSelect?: (groupId: string) => void;
+  isSelected?: boolean;
+};
+
+export function GroupCard({ group, onJoin, onSelect, isSelected = false }: GroupCardProps) {
   return (
-    <article className="card group-card">
+    <article className={`card group-card ${isSelected ? 'selected-card' : ''}`}>
       <div className="card-header">
         <div>
           <p className="eyebrow">{group.course.code}</p>
@@ -17,7 +24,16 @@ export function GroupCard({ group, onJoin }: { group: StudyGroup; onJoin: (group
         <span>Members: {group._count?.memberships ?? 0}/{group.maxMembers}</span>
         <span>Sessions: {group._count?.sessions ?? 0}</span>
       </div>
-      <button onClick={() => onJoin(group.id)}>Request to join</button>
+      <div className="button-row">
+        <button type="button" onClick={() => onJoin(group.id)}>
+          Request to join
+        </button>
+        {onSelect && (
+          <button type="button" className="ghost" onClick={() => onSelect(group.id)}>
+            View messages
+          </button>
+        )}
+      </div>
     </article>
   );
 }
