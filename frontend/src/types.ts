@@ -55,6 +55,18 @@ export type Match = {
 };
 
 
+
+export type StudySession = {
+  id: string;
+  groupId: string;
+  title: string;
+  startTime: string;
+  endTime: string;
+  location?: string | null;
+  notes?: string | null;
+  createdAt: string;
+};
+
 export type GroupMessage = {
   id: string;
   groupId: string;
