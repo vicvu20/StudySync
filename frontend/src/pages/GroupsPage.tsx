@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { apiRequest } from '../api/client';
 import { GroupCard } from '../components/GroupCard';
 import { GroupMessages } from '../components/GroupMessages';
+import { GroupSessions } from '../components/GroupSessions';
 import { useAuth } from '../context/AuthContext';
 import type { Course, StudyGroup } from '../types';
 
@@ -114,7 +115,8 @@ export function GroupsPage() {
         </div>
       </section>
 
-      <section className="full-width">
+      <section className="full-width group-detail-grid">
+        <GroupSessions group={groups.find((group) => group.id === selectedGroupId) ?? null} token={token} />
         <GroupMessages group={groups.find((group) => group.id === selectedGroupId) ?? null} token={token} />
       </section>
     </div>

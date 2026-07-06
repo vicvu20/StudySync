@@ -351,3 +351,60 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.65;
 }
+
+
+.group-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.session-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.session-list {
+  display: grid;
+  gap: 0.8rem;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.session-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 1rem;
+  background: #f8fafc;
+}
+
+.session-item p {
+  margin-bottom: 0.35rem;
+  color: #334155;
+}
+
+.session-notes {
+  white-space: pre-wrap;
+}
+
+.session-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.two-column {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .group-detail-grid,
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+}
