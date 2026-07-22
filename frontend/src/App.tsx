@@ -7,6 +7,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { GroupsPage } from './pages/GroupsPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFound } from './pages/NotFound';
+import { ScrollToTop } from './components/ScrollToTop';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const { token } = useAuth();
@@ -30,6 +31,7 @@ export function App() {
         <Route path="groups" element={<GroupsPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
+      <ScrollToTop />
     </Routes>
   );
 }
