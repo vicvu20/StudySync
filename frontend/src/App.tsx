@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { useAuth } from './context/AuthContext';
@@ -5,8 +6,9 @@ import { CoursesPage } from './pages/CoursesPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { GroupsPage } from './pages/GroupsPage';
 import { LoginPage } from './pages/LoginPage';
+import { NotFound } from './pages/NotFound';
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
+function ProtectedRoute({ children }: { children: ReactNode }) {
   const { token } = useAuth();
   return token ? <>{children}</> : <Navigate to="/login" replace />;
 }
@@ -26,6 +28,7 @@ export function App() {
         <Route index element={<DashboardPage />} />
         <Route path="courses" element={<CoursesPage />} />
         <Route path="groups" element={<GroupsPage />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
